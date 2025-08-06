@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "name": "Diamond Solitaire Ring",
+    "price": 1499,
+    "originalPrice": 1999,
+    "image": "https://sarkisiansjewelry.com/wp-content/uploads/2019/03/Solitaire-Diamond-Mens-Ring-MR4179-600x600.jpg",
+    "images": [
+      "https://sarkisiansjewelry.com/wp-content/uploads/2019/03/Solitaire-Diamond-Mens-Ring-MR4179-600x600.jpg",
+      "https://sarkisiansjewelry.com/wp-content/uploads/2019/03/Solitaire-Diamond-Mens-Ring-MR4179-600x600.jpg",
+      "https://sarkisiansjewelry.com/wp-content/uploads/2019/03/Solitaire-Diamond-Mens-Ring-MR4179-600x600.jpg"
+    ],
+    "category": "rings",
+    "material": "18K White Gold",
+    "purity": "18K",
+    "size": "Adjustable",
+    "rating": 4.8,
+    "description": "Elegant diamond solitaire ring crafted in 18K white gold, featuring a brilliant cut diamond that captures light beautifully. Perfect for engagements or special occasions.",
+    "specifications": {
+      "Metal": "18K White Gold",
+      "Stone": "Diamond",
+      "Carat": "0.5ct",
+      "Cut": "Round Brilliant",
+      "Clarity": "VS1",
+      "Color": "F"
+    },
+    "care": "Clean with mild soap and warm water. Store separately to avoid scratches. Professional cleaning recommended every 6 months."
+  },
+  {
+    "id": 2,
+    "name": "Pearl Drop Earrings",
+    "price": 899,
+    "originalPrice": 1299,
+    "image": "https://i.etsystatic.com/10565934/r/il/b82318/2074921262/il_fullxfull.2074921262_6ahv.jpg",
+    "images": [
+      "https://i.etsystatic.com/10565934/r/il/b82318/2074921262/il_fullxfull.2074921262_6ahv.jpg",
+      "https://i.etsystatic.com/10565934/r/il/b82318/2074921262/il_fullxfull.2074921262_6ahv.jpg"
+    ],
+    "category": "earrings",
+    "material": "Sterling Silver",
+    "purity": "925",
+    "size": "2.5cm length",
+    "rating": 4.6,
+    "description": "Classic pearl drop earrings in sterling silver, perfect for both casual and formal occasions. These timeless pieces add elegance to any outfit.",
+    "specifications": {
+      "Metal": "Sterling Silver",
+      "Stone": "Freshwater Pearl",
+      "Pearl Size": "8mm",
+      "Length": "2.5cm",
+      "Closure": "Hook"
+    },
+    "care": "Wipe with soft cloth after use. Avoid contact with perfumes and chemicals. Store in a dry place."
+  },
+  {
+    "id": 3,
+    "name": "Gold Chain Bracelet",
+    "price": 1299,
+    "originalPrice": 1799,
+    "image": "https://i.pinimg.com/originals/68/d2/e2/68d2e2cdb4be8ee660cc53d4cae1ed39.jpg",
+    "images": [
+      "https://i.pinimg.com/originals/68/d2/e2/68d2e2cdb4be8ee660cc53d4cae1ed39.jpg",
+      "https://i.pinimg.com/originals/68/d2/e2/68d2e2cdb4be8ee660cc53d4cae1ed39.jpg"
+    ],
+    "category": "bracelets",
+    "material": "14K Yellow Gold",
+    "purity": "14K",
+    "size": "7.5 inches",
+    "rating": 4.7,
+    "description": "Delicate gold chain bracelet with intricate link design, perfect for layering or wearing alone. A versatile piece for everyday elegance.",
+    "specifications": {
+      "Metal": "14K Yellow Gold",
+      "Length": "7.5 inches",
+      "Width": "3mm",
+      "Clasp": "Lobster Claw",
+      "Weight": "5.2g"
+    },
+    "care": "Clean with jewelry cleaning solution. Avoid exposure to harsh chemicals. Store in jewelry box."
+  },
+  {
+    "id": 4,
+    "name": "Emerald Stud Earrings",
+    "price": 1899,
+    "originalPrice": 2499,
+    "image": "https://i.etsystatic.com/18493453/r/il/6bcbef/2035472736/il_fullxfull.2035472736_e8jc.jpg",
+    "images": [
+      "https://i.etsystatic.com/18493453/r/il/6bcbef/2035472736/il_fullxfull.2035472736_e8jc.jpg",
+      "https://i.etsystatic.com/18493453/r/il/6bcbef/2035472736/il_fullxfull.2035472736_e8jc.jpg"
+    ],
+    "category": "earrings",
+    "material": "18K Yellow Gold",
+    "purity": "18K",
+    "size": "6mm",
+    "rating": 4.9,
+    "description": "Stunning emerald stud earrings set in 18K yellow gold, featuring natural emeralds with excellent clarity. A perfect addition to any jewelry collection.",
+    "specifications": {
+      "Metal": "18K Yellow Gold",
+      "Stone": "Natural Emerald",
+      "Carat": "1.2ct total",
+      "Cut": "Round",
+      "Size": "6mm",
+      "Backing": "Push Back"
+    },
+    "care": "Handle with care as emeralds are delicate. Clean with soft brush and mild soap. Avoid ultrasonic cleaners."
+  },
+  {
+    "id": 5,
+    "name": "Rose Gold Pendant Necklace",
+    "price": 1699,
+    "originalPrice": 2199,
+    "image": "https://i.etsystatic.com/5939762/r/il/bab666/1491236380/il_1080xN.1491236380_idqs.jpg",
+    "images": [
+      "https://i.etsystatic.com/5939762/r/il/bab666/1491236380/il_1080xN.1491236380_idqs.jpg",
+      "https://i.etsystatic.com/5939762/r/il/bab666/1491236380/il_1080xN.1491236380_idqs.jpg"
+    ],
+    "category": "necklaces",
+    "material": "14K Rose Gold",
+    "purity": "14K",
+    "size": "18 inches",
+    "rating": 4.5,
+    "description": "Elegant rose gold pendant necklace with heart-shaped design, perfect for gifting or personal wear. The warm rose gold tone complements all skin types.",
+    "specifications": {
+      "Metal": "14K Rose Gold",
+      "Chain Length": "18 inches",
+      "Pendant Size": "15mm",
+      "Chain Type": "Cable Chain",
+      "Clasp": "Spring Ring"
+    },
+    "care": "Polish regularly with soft cloth. Store separately to prevent tangling. Avoid contact with lotions."
+  },
+  {
+    "id": 6,
+    "name": "Sapphire Tennis Bracelet",
+    "price": 2999,
+    "originalPrice": 3999,
+    "image": "https://i.etsystatic.com/19103652/r/il/4af68e/2188830022/il_1588xN.2188830022_rc25.jpg",
+    "images": [
+      "https://i.etsystatic.com/19103652/r/il/4af68e/2188830022/il_1588xN.2188830022_rc25.jpg",
+      "https://i.etsystatic.com/19103652/r/il/4af68e/2188830022/il_1588xN.2188830022_rc25.jpg"
+    ],
+    "category": "bracelets",
+    "material": "Platinum",
+    "purity": "950",
+    "size": "7 inches",
+    "rating": 5.0,
+    "description": "Luxurious sapphire tennis bracelet featuring brilliant blue sapphires set in platinum. A statement piece that exudes sophistication and elegance.",
+    "specifications": {
+      "Metal": "Platinum 950",
+      "Stone": "Blue Sapphire",
+      "Total Carat": "5.0ct",
+      "Stone Count": "25 stones",
+      "Length": "7 inches",
+      "Clasp": "Box Clasp with Safety"
+    },
+    "care": "Professional cleaning recommended. Store in original box. Inspect clasp regularly for security."
+  }
+]
