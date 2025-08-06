@@ -282,7 +282,7 @@ const Home = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('https://www.krishnajewellers.com/blog/wp-content/uploads/2021/12/Buy-Gold-Choker-Designs.jpg')`
+            backgroundImage: `url('https://i.pinimg.com/originals/df/16/97/df169764643cf94805d75bf97bfa61f3.jpg')`
           }}
         ></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center text-white">
@@ -290,9 +290,10 @@ const Home = () => {
             Elegant Jewelry <br />
             <span className="text-[#D0B8A8]">Collection</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-            Discover timeless pieces that celebrate life's precious moments
-          </p>
+           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#8D493A] via-[#A9BFA8] to-[#3A3960] animate-zoom-in">
+             Discover timeless pieces that celebrate life's precious moments
+           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/shop">
               <button className="bg-[#8D493A] text-white px-6 py-3 rounded-lg hover:bg-[#D0B8A8] transition flex items-center space-x-2">

@@ -161,11 +161,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <h1 className="text-2xl font-bold text-[#8D493A] font-serif">
-              Jina Fashion
-            </h1>
-          </Link>
+       <Link to="/" className="flex items-center">
+  <img
+    src="../src/assets/logo.png"  // path to your new logo image
+    alt="Jina Fashion Logo"
+    className="h-40 w-auto" // adjust height/width as needed
+  />
+</Link>
+
+          
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">

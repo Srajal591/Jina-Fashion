@@ -256,7 +256,7 @@ const Contact = () => {
                 {
                   icon: <Mail className="w-6 h-6 text-[#D0B8A8]" />,
                   title: 'Email Us',
-                  content: 'info@jinafashion.com\nsupport@jinafashion.com'
+                  content: 'info@srajalfashion.com\nsupport@jinafashion.com'
                 },
                 {
                   icon: <Clock className="w-6 h-6 text-[#D0B8A8]" />,
