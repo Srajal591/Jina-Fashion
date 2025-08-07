@@ -1,106 +1,36 @@
-// import React, { useEffect } from 'react'
-// import { X } from 'lucide-react'
+import React, { useEffect } from "react";
+import { X } from "lucide-react";
 
-// const Modal = ({ isOpen, onClose, children, title, size = 'lg' }) => {
-//   useEffect(() => {
-//     if (isOpen) {
-//       document.body.style.overflow = 'hidden'
-//     } else {
-//       document.body.style.overflow = 'unset'
-//     }
-
-//     return () => {
-//       document.body.style.overflow = 'unset'
-//     }
-//   }, [isOpen])
-
-//   useEffect(() => {
-//     const handleEscape = (e) => {
-//       if (e.key === 'Escape') {
-//         onClose()
-//       }
-//     }
-
-//     if (isOpen) {
-//       document.addEventListener('keydown', handleEscape)
-//     }
-
-//     return () => {
-//       document.removeEventListener('keydown', handleEscape)
-//     }
-//   }, [isOpen, onClose])
-
-//   if (!isOpen) return null
-
-//   const sizeClasses = {
-//     sm: 'max-w-md',
-//     md: 'max-w-lg',
-//     lg: 'max-w-2xl',
-//     xl: 'max-w-4xl',
-//     full: 'max-w-full mx-4'
-//   }
-
-//   return (
-//     <div className="modal-overlay" onClick={onClose}>
-//       <div 
-//         className={`modal-content ${sizeClasses[size]}`}
-//         onClick={(e) => e.stopPropagation()}
-//       >
-//         {title && (
-//           <div className="flex items-center justify-between p-6 border-b border-gray-200">
-//             <h2 className="text-xl font-bold text-gray-900 font-serif">{title}</h2>
-//             <button
-//               onClick={onClose}
-//               className="text-gray-400 hover:text-gray-600 transition-colors"
-//             >
-//               <X className="w-6 h-6" />
-//             </button>
-//           </div>
-//         )}
-//         <div className="p-6">
-//           {children}
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Modal
-
-
-import React, { useEffect } from 'react'
-import { X } from 'lucide-react'
-
-const Modal = ({ isOpen, onClose, children, title, size = 'lg' }) => {
+const Modal = ({ isOpen, onClose, children, title, size = "lg" }) => {
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'unset'
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
     return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen])
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
+      if (e.key === "Escape") onClose();
+    };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
+      document.addEventListener("keydown", handleEscape);
     }
     return () => {
-      document.removeEventListener('keydown', handleEscape)
-    }
-  }, [isOpen, onClose])
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   const sizeClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-2xl',
-    xl: 'max-w-4xl',
-    full: 'max-w-6xl'
-  }
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-2xl",
+    xl: "max-w-4xl",
+    full: "max-w-6xl",
+  };
 
   return (
     <div
@@ -114,7 +44,9 @@ const Modal = ({ isOpen, onClose, children, title, size = 'lg' }) => {
         {/* Header */}
         {title && (
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 font-serif">{title}</h2>
+            <h2 className="text-xl font-bold text-gray-900 font-serif">
+              {title}
+            </h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -125,12 +57,10 @@ const Modal = ({ isOpen, onClose, children, title, size = 'lg' }) => {
         )}
 
         {/* Content */}
-        <div className="p-6">
-          {children}
-        </div>
+        <div className="p-6">{children}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

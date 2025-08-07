@@ -1,394 +1,111 @@
-// import React, { useState, useEffect } from 'react'
-// import { useSearchParams } from 'react-router-dom'
-// import { Search, Filter, ShoppingCart, Heart } from 'lucide-react'
-// import ProductGrid from '../components/ProductGrid'
-// import Modal from '../components/Modal'
-// import { useCart } from '../context/CartContext'
-// import { useToast } from '../context/ToastContext'
-// import productsData from '../data/products.json'
-
-// const Shop = () => {
-//   const [searchParams, setSearchParams] = useSearchParams()
-//   const [products, setProducts] = useState([])
-//   const [filteredProducts, setFilteredProducts] = useState([])
-//   const [searchTerm, setSearchTerm] = useState('')
-//   const [sortBy, setSortBy] = useState('name')
-//   const [selectedCategories, setSelectedCategories] = useState([])
-//   const [priceRange, setPriceRange] = useState([0, 5000])
-//   const [selectedProduct, setSelectedProduct] = useState(null)
-//   const [isModalOpen, setIsModalOpen] = useState(false)
-//   const { addToCart, addToWishlist } = useCart()
-//   const { addToast } = useToast()
-
-//   const categories = ['rings', 'earrings', 'necklaces', 'bracelets']
-
-//   useEffect(() => {
-//     setProducts(productsData)
-    
-//     // Check for category filter from URL
-//     const categoryParam = searchParams.get('category')
-//     if (categoryParam) {
-//       setSelectedCategories([categoryParam])
-//     }
-//   }, [searchParams])
-
-//   useEffect(() => {
-//     let filtered = products
-
-//     // Filter by search term
-//     if (searchTerm) {
-//       filtered = filtered.filter(product =>
-//         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//         product.category.toLowerCase().includes(searchTerm.toLowerCase())
-//       )
-//     }
-
-//     // Filter by categories
-//     if (selectedCategories.length > 0) {
-//       filtered = filtered.filter(product =>
-//         selectedCategories.includes(product.category)
-//       )
-//     }
-
-//     // Filter by price range
-//     filtered = filtered.filter(product =>
-//       product.price >= priceRange[0] && product.price <= priceRange[1]
-//     )
-
-//     // Sort products
-//     filtered.sort((a, b) => {
-//       switch (sortBy) {
-//         case 'price-low':
-//           return a.price - b.price
-//         case 'price-high':
-//           return b.price - a.price
-//         case 'rating':
-//           return b.rating - a.rating
-//         case 'name':
-//         default:
-//           return a.name.localeCompare(b.name)
-//       }
-//     })
-
-//     setFilteredProducts(filtered)
-//   }, [products, searchTerm, selectedCategories, priceRange, sortBy])
-
-//   const handleQuickView = (product) => {
-//     setSelectedProduct(product)
-//     setIsModalOpen(true)
-//   }
-
-//   const handleAddToCart = (product) => {
-//     addToCart(product)
-//     addToast(`${product.name} added to cart`, 'success')
-//     setIsModalOpen(false)
-//   }
-
-//   const handleAddToWishlist = (product) => {
-//     addToWishlist(product)
-//     addToast(`${product.name} added to wishlist`, 'success')
-//   }
-
-//   const handleCategoryChange = (category) => {
-//     if (selectedCategories.includes(category)) {
-//       setSelectedCategories(selectedCategories.filter(c => c !== category))
-//     } else {
-//       setSelectedCategories([...selectedCategories, category])
-//     }
-//   }
-
-//   const clearFilters = () => {
-//     setSearchTerm('')
-//     setSelectedCategories([])
-//     setPriceRange([0, 5000])
-//     setSortBy('name')
-//     setSearchParams({})
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-gray-50 py-8">
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//         <div className="mb-8">
-//           <h1 className="text-4xl font-bold text-gray-900 font-serif mb-4">
-//             Jewelry Collection
-//           </h1>
-//           <p className="text-xl text-gray-600">
-//             Discover our exquisite range of handcrafted jewelry
-//           </p>
-//         </div>
-
-//         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-//           {/* Filters Sidebar */}
-//           <div className="lg:col-span-1">
-//             <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
-//               <div className="flex items-center justify-between mb-6">
-//                 <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
-//                 <button 
-//                   onClick={clearFilters}
-//                   className="text-sm text-gold-600 hover:text-gold-700 transition-colors"
-//                 >
-//                   Clear All
-//                 </button>
-//               </div>
-
-//               {/* Search */}
-//               <div className="space-y-6">
-//                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 mb-2">
-//                     Search
-//                   </label>
-//                   <div className="relative">
-//                     <input
-//                       type="text"
-//                       placeholder="Search products..."
-//                       value={searchTerm}
-//                       onChange={(e) => setSearchTerm(e.target.value)}
-//                       className="input-field pr-10"
-//                     />
-//                     <Search className="absolute right-3 top-3 h-4 w-4 text-gray-400" />
-//                   </div>
-//                 </div>
-
-//                 {/* Categories */}
-//                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 mb-2">
-//                     Categories
-//                   </label>
-//                   <div className="space-y-2">
-//                     {categories.map((category) => (
-//                       <label key={category} className="flex items-center">
-//                         <input
-//                           type="checkbox"
-//                           checked={selectedCategories.includes(category)}
-//                           onChange={() => handleCategoryChange(category)}
-//                           className="rounded border-gray-300 text-gold-600 focus:ring-gold-500"
-//                         />
-//                         <span className="ml-2 text-sm text-gray-700 capitalize">{category}</span>
-//                       </label>
-//                     ))}
-//                   </div>
-//                 </div>
-
-//                 {/* Price Range */}
-//                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 mb-2">
-//                     Price Range
-//                   </label>
-//                   <div className="flex space-x-2">
-//                     <input
-//                       type="number"
-//                       placeholder="Min"
-//                       value={priceRange[0]}
-//                       onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
-//                       className="input-field text-sm"
-//                     />
-//                     <span className="flex items-center text-gray-500">-</span>
-//                     <input
-//                       type="number"
-//                       placeholder="Max"
-//                       value={priceRange[1]}
-//                       onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 5000])}
-//                       className="input-field text-sm"
-//                     />
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Products Grid */}
-//           <div className="lg:col-span-3">
-//             {/* Sort and Results Count */}
-//             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-//               <p className="text-gray-600">
-//                 Showing {filteredProducts.length} of {products.length} products
-//               </p>
-//               <div className="flex items-center space-x-2">
-//                 <span className="text-sm text-gray-600">Sort by:</span>
-//                 <select
-//                   value={sortBy}
-//                   onChange={(e) => setSortBy(e.target.value)}
-//                   className="input-field text-sm w-48"
-//                 >
-//                   <option value="name">Name (A-Z)</option>
-//                   <option value="price-low">Price (Low to High)</option>
-//                   <option value="price-high">Price (High to Low)</option>
-//                   <option value="rating">Rating</option>
-//                 </select>
-//               </div>
-//             </div>
-
-//             {/* Products */}
-//             {filteredProducts.length > 0 ? (
-//               <ProductGrid products={filteredProducts} onQuickView={handleQuickView} />
-//             ) : (
-//               <div className="text-center py-12">
-//                 <p className="text-gray-500 text-lg mb-4">No products found matching your criteria.</p>
-//                 <button onClick={clearFilters} className="btn-primary">
-//                   Clear Filters
-//                 </button>
-//               </div>
-//             )}
-//           </div>
-//         </div>
-
-//         {/* Quick View Modal */}
-//         <Modal
-//           isOpen={isModalOpen}
-//           onClose={() => setIsModalOpen(false)}
-//           title={selectedProduct?.name}
-//           size="xl"
-//         >
-//           {selectedProduct && (
-//             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//               <img
-//                 src={selectedProduct.image || "/placeholder.svg"}
-//                 alt={selectedProduct.name}
-//                 className="w-full h-64 object-cover rounded-lg"
-//               />
-//               <div>
-//                 <div className="flex items-center space-x-2 mb-4">
-//                   <span className="text-2xl font-bold text-gold-600">
-//                     ₹{selectedProduct.price?.toLocaleString()}
-//                   </span>
-//                   {selectedProduct.originalPrice > selectedProduct.price && (
-//                     <span className="text-lg text-gray-500 line-through">
-//                       ₹{selectedProduct.originalPrice?.toLocaleString()}
-//                     </span>
-//                   )}
-//                 </div>
-//                 <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
-//                 <div className="space-y-2 text-sm mb-6">
-//                   <p><strong>Material:</strong> {selectedProduct.material}</p>
-//                   <p><strong>Category:</strong> {selectedProduct.category}</p>
-//                   <p><strong>Rating:</strong> ⭐ {selectedProduct.rating}</p>
-//                 </div>
-//                 <div className="flex space-x-3">
-//                   <button 
-//                     onClick={() => handleAddToCart(selectedProduct)}
-//                     className="btn-primary flex items-center space-x-2"
-//                   >
-//                     <ShoppingCart className="w-4 h-4" />
-//                     <span>Add to Cart</span>
-//                   </button>
-//                   <button 
-//                     onClick={() => handleAddToWishlist(selectedProduct)}
-//                     className="btn-outline flex items-center space-x-2"
-//                   >
-//                     <Heart className="w-4 h-4" />
-//                     <span>Add to Wishlist</span>
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           )}
-//         </Modal>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Shop
-
-
-import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { Search, Filter, ShoppingCart, Heart } from 'lucide-react'
-import ProductGrid from '../components/ProductGrid'
-import Modal from '../components/Modal'
-import { useCart } from '../context/CartContext'
-import { useToast } from '../context/ToastContext'
-import productsData from '../data/products.json'
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Search, Filter, ShoppingCart, Heart } from "lucide-react";
+import ProductGrid from "../components/ProductGrid";
+import Modal from "../components/Modal";
+import { useCart } from "../context/CartContext";
+import { useToast } from "../context/ToastContext";
+import productsData from "../data/products.json";
 
 const Shop = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [products, setProducts] = useState([])
-  const [filteredProducts, setFilteredProducts] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [sortBy, setSortBy] = useState('name')
-  const [selectedCategories, setSelectedCategories] = useState([])
-  const [priceRange, setPriceRange] = useState([0, 5000])
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const { addToCart, addToWishlist } = useCart()
-  const { addToast } = useToast()
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("name");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addToCart, addToWishlist } = useCart();
+  const { addToast } = useToast();
 
-  const categories = ['rings', 'earrings', 'necklaces', 'bracelets']
+  const categories = ["rings", "earrings", "necklaces", "bracelets"];
 
   useEffect(() => {
-    setProducts(productsData)
-    const categoryParam = searchParams.get('category')
+    setProducts(productsData);
+    const categoryParam = searchParams.get("category");
     if (categoryParam) {
-      setSelectedCategories([categoryParam])
+      setSelectedCategories([categoryParam]);
     }
-  }, [searchParams])
+  }, [searchParams]);
 
   useEffect(() => {
-    let filtered = products
+    let filtered = products;
     if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
     if (selectedCategories.length > 0) {
-      filtered = filtered.filter(product =>
+      filtered = filtered.filter((product) =>
         selectedCategories.includes(product.category)
-      )
+      );
     }
-    filtered = filtered.filter(product =>
-      product.price >= priceRange[0] && product.price <= priceRange[1]
-    )
+    filtered = filtered.filter(
+      (product) =>
+        product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
     filtered.sort((a, b) => {
       switch (sortBy) {
-        case 'price-low': return a.price - b.price
-        case 'price-high': return b.price - a.price
-        case 'rating': return b.rating - a.rating
-        case 'name':
-        default: return a.name.localeCompare(b.name)
+        case "price-low":
+          return a.price - b.price;
+        case "price-high":
+          return b.price - a.price;
+        case "rating":
+          return b.rating - a.rating;
+        case "name":
+        default:
+          return a.name.localeCompare(b.name);
       }
-    })
-    setFilteredProducts(filtered)
-  }, [products, searchTerm, selectedCategories, priceRange, sortBy])
+    });
+    setFilteredProducts(filtered);
+  }, [products, searchTerm, selectedCategories, priceRange, sortBy]);
 
   const handleQuickView = (product) => {
-    setSelectedProduct(product)
-    setIsModalOpen(true)
-  }
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
 
   const handleAddToCart = (product) => {
-    addToCart(product)
-    addToast(`${product.name} added to cart`, 'success')
-    setIsModalOpen(false)
-  }
+    addToCart(product);
+    addToast(`${product.name} added to cart`, "success");
+    setIsModalOpen(false);
+  };
 
   const handleAddToWishlist = (product) => {
-    addToWishlist(product)
-    addToast(`${product.name} added to wishlist`, 'success')
-  }
+    addToWishlist(product);
+    addToast(`${product.name} added to wishlist`, "success");
+  };
 
   const handleCategoryChange = (category) => {
     if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter(c => c !== category))
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
     } else {
-      setSelectedCategories([...selectedCategories, category])
+      setSelectedCategories([...selectedCategories, category]);
     }
-  }
+  };
 
   const clearFilters = () => {
-    setSearchTerm('')
-    setSelectedCategories([])
-    setPriceRange([0, 5000])
-    setSortBy('name')
-    setSearchParams({})
-  }
+    setSearchTerm("");
+    setSelectedCategories([]);
+    setPriceRange([0, 5000]);
+    setSortBy("name");
+    setSearchParams({});
+  };
 
   return (
     <div className="min-h-screen bg-[#F8EDE3] py-8 text-[#8D493A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold font-serif mb-4">Jewelry Collection</h1>
-          <p className="text-xl">Discover our exquisite range of handcrafted jewelry</p>
+          <h1 className="text-4xl font-bold font-serif mb-4">
+            Jewelry Collection
+          </h1>
+          <p className="text-xl">
+            Discover our exquisite range of handcrafted jewelry
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -396,14 +113,19 @@ const Shop = () => {
             <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold">Filters</h3>
-                <button onClick={clearFilters} className="text-sm text-[#8D493A] hover:text-[#5C2E1F]">
+                <button
+                  onClick={clearFilters}
+                  className="text-sm text-[#8D493A] hover:text-[#5C2E1F]"
+                >
                   Clear All
                 </button>
               </div>
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Search</label>
+                  <label className="block text-sm font-medium mb-2">
+                    Search
+                  </label>
                   <div className="relative">
                     <input
                       type="text"
@@ -417,7 +139,9 @@ const Shop = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Categories</label>
+                  <label className="block text-sm font-medium mb-2">
+                    Categories
+                  </label>
                   <div className="space-y-2">
                     {categories.map((category) => (
                       <label key={category} className="flex items-center">
@@ -427,20 +151,29 @@ const Shop = () => {
                           onChange={() => handleCategoryChange(category)}
                           className="rounded border-gray-300 text-[#8D493A] focus:ring-[#D0B8A8]"
                         />
-                        <span className="ml-2 text-sm capitalize">{category}</span>
+                        <span className="ml-2 text-sm capitalize">
+                          {category}
+                        </span>
                       </label>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Price Range</label>
+                  <label className="block text-sm font-medium mb-2">
+                    Price Range
+                  </label>
                   <div className="flex space-x-2">
                     <input
                       type="number"
                       placeholder="Min"
                       value={priceRange[0]}
-                      onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
+                      onChange={(e) =>
+                        setPriceRange([
+                          parseInt(e.target.value) || 0,
+                          priceRange[1],
+                        ])
+                      }
                       className="input-field text-sm"
                     />
                     <span className="flex items-center">-</span>
@@ -448,7 +181,12 @@ const Shop = () => {
                       type="number"
                       placeholder="Max"
                       value={priceRange[1]}
-                      onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 5000])}
+                      onChange={(e) =>
+                        setPriceRange([
+                          priceRange[0],
+                          parseInt(e.target.value) || 5000,
+                        ])
+                      }
                       className="input-field text-sm"
                     />
                   </div>
@@ -459,7 +197,9 @@ const Shop = () => {
 
           <div className="lg:col-span-3">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-              <p>Showing {filteredProducts.length} of {products.length} products</p>
+              <p>
+                Showing {filteredProducts.length} of {products.length} products
+              </p>
               <div className="flex items-center space-x-2">
                 <span className="text-sm">Sort by:</span>
                 <select
@@ -476,17 +216,29 @@ const Shop = () => {
             </div>
 
             {filteredProducts.length > 0 ? (
-              <ProductGrid products={filteredProducts} onQuickView={handleQuickView} />
+              <ProductGrid
+                products={filteredProducts}
+                onQuickView={handleQuickView}
+              />
             ) : (
               <div className="text-center py-12">
-                <p className="text-lg mb-4">No products found matching your criteria.</p>
-                <button onClick={clearFilters} className="btn-primary">Clear Filters</button>
+                <p className="text-lg mb-4">
+                  No products found matching your criteria.
+                </p>
+                <button onClick={clearFilters} className="btn-primary">
+                  Clear Filters
+                </button>
               </div>
             )}
           </div>
         </div>
 
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={selectedProduct?.name} size="xl">
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={selectedProduct?.name}
+          size="xl"
+        >
           {selectedProduct && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <img
@@ -505,17 +257,32 @@ const Shop = () => {
                     </span>
                   )}
                 </div>
-                <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
+                <p className="text-gray-600 mb-4">
+                  {selectedProduct.description}
+                </p>
                 <div className="space-y-2 text-sm mb-6">
-                  <p><strong>Material:</strong> {selectedProduct.material}</p>
-                  <p><strong>Category:</strong> {selectedProduct.category}</p>
-                  <p><strong>Rating:</strong> ⭐ {selectedProduct.rating}</p>
+                  <p>
+                    <strong>Material:</strong> {selectedProduct.material}
+                  </p>
+                  <p>
+                    <strong>Category:</strong> {selectedProduct.category}
+                  </p>
+                  <p>
+                    <strong>Rating:</strong> ⭐ {selectedProduct.rating}
+                  </p>
                 </div>
                 <div className="flex space-x-3">
-                  <button onClick={() => handleAddToCart(selectedProduct)} className="btn-primary flex items-center space-x-2">
-                    <ShoppingCart className="w-4 h-4" /> <span>Add to Cart</span>
+                  <button
+                    onClick={() => handleAddToCart(selectedProduct)}
+                    className="btn-primary flex items-center space-x-2"
+                  >
+                    <ShoppingCart className="w-4 h-4" />{" "}
+                    <span>Add to Cart</span>
                   </button>
-                  <button onClick={() => handleAddToWishlist(selectedProduct)} className="btn-outline flex items-center space-x-2">
+                  <button
+                    onClick={() => handleAddToWishlist(selectedProduct)}
+                    className="btn-outline flex items-center space-x-2"
+                  >
                     <Heart className="w-4 h-4" /> <span>Add to Wishlist</span>
                   </button>
                 </div>
@@ -525,7 +292,7 @@ const Shop = () => {
         </Modal>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;

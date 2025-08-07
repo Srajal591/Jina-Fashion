@@ -1,155 +1,40 @@
-// import React from 'react'
-// import { Link } from 'react-router-dom'
-// import { Heart, ShoppingCart, Eye } from 'lucide-react'
-// import { useCart } from '../context/CartContext'
-// import { useToast } from '../context/ToastContext'
-
-// const ProductCard = ({ product, onQuickView }) => {
-//   const { addToCart, addToWishlist, wishlist } = useCart()
-//   const { addToast } = useToast()
-
-//   const isInWishlist = wishlist.some(item => item.id === product.id)
-//   const discountPercentage = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-
-//   const handleAddToCart = (e) => {
-//     e.preventDefault()
-//     addToCart(product)
-//     addToast(`${product.name} added to cart`, 'success')
-//   }
-
-//   const handleAddToWishlist = (e) => {
-//     e.preventDefault()
-//     if (!isInWishlist) {
-//       addToWishlist(product)
-//       addToast(`${product.name} added to wishlist`, 'success')
-//     }
-//   }
-
-//   const handleQuickView = (e) => {
-//     e.preventDefault()
-//     onQuickView && onQuickView(product)
-//   }
-
-//   return (
-//     <div className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-//       <Link to={`/product/${product.id}`}>
-//         <div className="relative overflow-hidden">
-//           <img
-//             src={product.image || "/placeholder.svg"}
-//             alt={product.name}
-//             className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-//           />
-          
-//           {/* Discount Badge */}
-//           {discountPercentage > 0 && (
-//             <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-//               {discountPercentage}% OFF
-//             </div>
-//           )}
-
-//           {/* Action Buttons */}
-//           <div className="absolute top-2 right-2 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//             <button
-//               onClick={handleAddToWishlist}
-//               className={`p-2 rounded-full shadow-md transition-colors ${
-//                 isInWishlist 
-//                   ? 'bg-red-500 text-white' 
-//                   : 'bg-white text-gray-600 hover:bg-red-50 hover:text-red-500'
-//               }`}
-//               title="Add to Wishlist"
-//             >
-//               <Heart className="w-4 h-4" />
-//             </button>
-            
-//             <button
-//               onClick={handleQuickView}
-//               className="p-2 bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-800 rounded-full shadow-md transition-colors"
-//               title="Quick View"
-//             >
-//               <Eye className="w-4 h-4" />
-//             </button>
-//           </div>
-
-//           {/* Add to Cart Button */}
-//           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//             <button
-//               onClick={handleAddToCart}
-//               className="w-full bg-gold-600 hover:bg-gold-700 text-white py-2 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors duration-200"
-//             >
-//               <ShoppingCart className="w-4 h-4" />
-//               <span>Add to Cart</span>
-//             </button>
-//           </div>
-//         </div>
-
-//         <div className="p-4">
-//           <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-//             {product.name}
-//           </h3>
-          
-//           <div className="flex items-center space-x-2 mb-2">
-//             <span className="text-lg font-bold text-gold-600">
-//               ₹{product.price.toLocaleString()}
-//             </span>
-//             {product.originalPrice > product.price && (
-//               <span className="text-sm text-gray-500 line-through">
-//                 ₹{product.originalPrice.toLocaleString()}
-//               </span>
-//             )}
-//           </div>
-
-//           <div className="flex items-center justify-between">
-//             <span className="text-sm text-gray-600 capitalize">
-//               {product.category}
-//             </span>
-//             <div className="flex items-center">
-//               <span className="text-yellow-400">★</span>
-//               <span className="text-sm text-gray-600 ml-1">
-//                 {product.rating}
-//               </span>
-//             </div>
-//           </div>
-//         </div>
-//       </Link>
-//     </div>
-//   )
-// }
-
-// export default ProductCard
-
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Heart, ShoppingCart, Eye } from 'lucide-react'
-import { useCart } from '../context/CartContext'
-import { useToast } from '../context/ToastContext'
+import React from "react";
+import { Link } from "react-router-dom";
+import { Heart, ShoppingCart, Eye } from "lucide-react";
+import { useCart } from "../context/CartContext";
+import { useToast } from "../context/ToastContext";
 
 const ProductCard = ({ product, onQuickView }) => {
-  const { addToCart, addToWishlist, wishlist } = useCart()
-  const { addToast } = useToast()
+  const { addToCart, addToWishlist, wishlist } = useCart();
+  const { addToast } = useToast();
 
-  const isInWishlist = wishlist.some(item => item.id === product.id)
-  const discountPercentage = product.originalPrice > product.price
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : 0
+  const isInWishlist = wishlist.some((item) => item.id === product.id);
+  const discountPercentage =
+    product.originalPrice > product.price
+      ? Math.round(
+          ((product.originalPrice - product.price) / product.originalPrice) *
+            100
+        )
+      : 0;
 
   const handleAddToCart = (e) => {
-    e.preventDefault()
-    addToCart(product)
-    addToast(`${product.name} added to cart`, 'success')
-  }
+    e.preventDefault();
+    addToCart(product);
+    addToast(`${product.name} added to cart`, "success");
+  };
 
   const handleAddToWishlist = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (!isInWishlist) {
-      addToWishlist(product)
-      addToast(`${product.name} added to wishlist`, 'success')
+      addToWishlist(product);
+      addToast(`${product.name} added to wishlist`, "success");
     }
-  }
+  };
 
   const handleQuickView = (e) => {
-    e.preventDefault()
-    onQuickView && onQuickView(product)
-  }
+    e.preventDefault();
+    onQuickView && onQuickView(product);
+  };
 
   return (
     <div className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-[#DFD3C3]/50">
@@ -173,8 +58,8 @@ const ProductCard = ({ product, onQuickView }) => {
               onClick={handleAddToWishlist}
               className={`p-2 rounded-full shadow-md transition-colors ${
                 isInWishlist
-                  ? 'bg-red-500 text-white'
-                  : 'bg-white text-[#8D493A] hover:bg-red-50 hover:text-red-500'
+                  ? "bg-red-500 text-white"
+                  : "bg-white text-[#8D493A] hover:bg-red-50 hover:text-red-500"
               }`}
               title="Add to Wishlist"
             >
@@ -232,7 +117,7 @@ const ProductCard = ({ product, onQuickView }) => {
         </div>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

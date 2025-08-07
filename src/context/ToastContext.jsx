@@ -1,47 +1,47 @@
-import React, { createContext, useContext, useState, useCallback } from 'react'
-import { CheckCircle, XCircle, Info, X } from 'lucide-react'
+import React, { createContext, useContext, useState, useCallback } from "react";
+import { CheckCircle, XCircle, Info, X } from "lucide-react";
 
-const ToastContext = createContext()
+const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
-  const [toasts, setToasts] = useState([])
+  const [toasts, setToasts] = useState([]);
 
-  const addToast = useCallback((message, type = 'info', duration = 3000) => {
-    const id = Date.now()
-    const toast = { id, message, type, duration }
-    
-    setToasts(prev => [...prev, toast])
-    
+  const addToast = useCallback((message, type = "info", duration = 3000) => {
+    const id = Date.now();
+    const toast = { id, message, type, duration };
+
+    setToasts((prev) => [...prev, toast]);
+
     setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id))
-    }, duration)
-  }, [])
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, duration);
+  }, []);
 
   const removeToast = useCallback((id) => {
-    setToasts(prev => prev.filter(t => t.id !== id))
-  }, [])
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   const getIcon = (type) => {
     switch (type) {
-      case 'success':
-        return <CheckCircle className="w-5 h-5 text-green-600" />
-      case 'error':
-        return <XCircle className="w-5 h-5 text-red-600" />
+      case "success":
+        return <CheckCircle className="w-5 h-5 text-green-600" />;
+      case "error":
+        return <XCircle className="w-5 h-5 text-red-600" />;
       default:
-        return <Info className="w-5 h-5 text-blue-600" />
+        return <Info className="w-5 h-5 text-blue-600" />;
     }
-  }
+  };
 
   const getToastClass = (type) => {
     switch (type) {
-      case 'success':
-        return 'toast toast-success'
-      case 'error':
-        return 'toast toast-error'
+      case "success":
+        return "toast toast-success";
+      case "error":
+        return "toast toast-error";
       default:
-        return 'toast toast-info'
+        return "toast toast-info";
     }
-  }
+  };
 
   return (
     <ToastContext.Provider value={{ addToast }}>
@@ -63,13 +63,13 @@ export const ToastProvider = ({ children }) => {
         ))}
       </div>
     </ToastContext.Provider>
-  )
-}
+  );
+};
 
 export const useToast = () => {
-  const context = useContext(ToastContext)
+  const context = useContext(ToastContext);
   if (!context) {
-    throw new Error('useToast must be used within a ToastProvider')
+    throw new Error("useToast must be used within a ToastProvider");
   }
-  return context
-}
+  return context;
+};
