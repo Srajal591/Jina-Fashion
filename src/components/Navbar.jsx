@@ -30,7 +30,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
-              src="../src/assets/logo.png" // path to your new logo image
+              src="/logo.png" // path to your new logo image
               alt="Jina Fashion Logo"
               className="h-40 w-auto" // adjust height/width as needed
             />
